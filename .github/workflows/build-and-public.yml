@@ -20,43 +20,38 @@ jobs:
           - name: base
             suffix: ""
             latest: false
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
+
 
           - name: claude
             suffix: "-claude"
             latest: false
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
               CLAUDE_PREINSTALLED=true
 
           - name: gemini
             suffix: "-gemini"
             latest: false
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
               GEMINI_PREINSTALLED=true
 
           - name: codex
             suffix: "-codex"
             latest: false
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
               CODEX_PREINSTALLED=true
 
           - name: claude-gemini
             suffix: "-claude-gemini"
             latest: false
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
               CLAUDE_PREINSTALLED=true
               GEMINI_PREINSTALLED=true
 
           - name: all
             suffix: "-all"
             latest: true
-            build_args: |
-              NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            extras: |
               CLAUDE_PREINSTALLED=true
               GEMINI_PREINSTALLED=true
               CODEX_PREINSTALLED=true
@@ -92,4 +87,6 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.prep.outputs.tags }}
-          build-args: ${{ matrix.build_args }}
+          build-args: |
+            NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            ${{ matrix.extras }}
