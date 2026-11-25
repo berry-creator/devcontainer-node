@@ -1,4 +1,4 @@
-FROM letsdone/devcontainer-base:0.1.3-python
+FROM letsdone/devcontainer-base:0.1.4-python
 USER root
 
 ARG USERNAME=dev
